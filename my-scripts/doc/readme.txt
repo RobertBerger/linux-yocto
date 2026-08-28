@@ -1,12 +1,12 @@
 1) create a new repo on github
 
-git clone git@github.com:RobertBerger/meta-arm.git
+git clone git@github.com:RobertBerger/linux-yocto.git
 
 2) add my-scripts dir
 
-cd meta-arm
+cd linux-yocto
 
-echo "# meta-arm fork" >> README.md
+echo "# linux-yocto fork" >> README.md
 
 git init
 
@@ -14,20 +14,18 @@ git add .
 
 git commit -m "first commit"
 
-#git remote add origin git@github.com:RobertBerger/meta-arm.git
-
 git push -u origin master
 
 3) use my repo
 
-mv meta-arm meta-arm.ori
-git clone git@github.com:RobertBerger/meta-arm.git
+mv linux-yocto linux-yocto.ori
+git clone git@github.com:RobertBerger/linux-yocto.git
 
 4) add upstream
 
-cd meta-arm
+cd linux-yocto
 
-git remote add official-upstream https://git.yoctoproject.org/meta-arm
+git remote add official-upstream https://git.yoctoproject.org/linux-yocto
 
 $ git fetch official-upstream
 
@@ -36,6 +34,13 @@ warning: no common commits
 ...
 
 5) use specific upstream branch and make our own branch
+
+
+
+git checkout -b v6.18/standard/phyboard-pollux-imx8mp-3 official-upstream/v6.18/standard/base
+git checkout -b v6.18/standard/pollux official-upstream/v6.18/standard/base
+
+
 
 git co remotes/official-upstream/master
 
