@@ -1,30 +1,25 @@
-on the build machine:
+on the git machine:
 
-backup meta-arm (tarball)
+backup linux-yocto (tarball)
 
-cd meta-arm
+cd linux-yocto
 
+----------------------------
+== update/rebase custom branches ==
 git co master
-git remote add official-upstream https://git.yoctoproject.org/meta-arm
 git fetch official-upstream
 
-# here are my modifications to a previous version
-git checkout 2026-08-11-training
+# Switch to your local base branch (if you have one, or create it)
+# git checkout v6.18/standard/base 2>/dev/null || git checkout -b v6.18/standard/base official-upstream/v6.18/standard/base
+# Reset it to match the exact state of the official upstream
+# git reset --hard official-upstream/v6.18/standard/base
 
-# new branch
-git checkout -b 2026-08-11-training-merged
-git diff 2026-08-11-training
-# they should be identical and we should be on the 2026-08-11-training-merged branch
+# 2. Rebase your first branch directly against the remote tracking branch
+git checkout v6.18/standard/phyboard-pollux-imx8mp-3
+git rebase official-upstream/v6.18/standard/base
 
-# rebase
-git rebase official-upstream/master
-
-Successfully rebased and updated refs/heads/2026-08-11-training-merged.
-
-bitbake core-image-minimal
-
-ERROR: No recipes in default available for:
-  /workdir/build/yocto-ampliphy-master-2026-08-11-01-pinned/bitbake-builds/yocto-ampliphy-pinned/layers/meta-phytec/dynamic-layers/meta-arm/recipes-bsp/trusted-firmware-a/trusted-firmware-a_2.10%.bbappend
-
-We need to rebase meta-phytec to get this fixed!
+# 3. Rebase your second branch directly against the remote tracking branch
+git checkout v6.18/standard/pollux
+git rebase official-upstream/v6.18/standard/base
+----------------------------
 
