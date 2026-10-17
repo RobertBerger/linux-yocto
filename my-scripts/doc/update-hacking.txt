@@ -22,4 +22,11 @@ git rebase official-upstream/v6.18/standard/base
 git checkout v6.18/standard/pollux
 git rebase official-upstream/v6.18/standard/base
 ----------------------------
+== new branch ==
+git co master
+git fetch official-upstream
+git checkout -b v7.2/standard/phyboard-pollux-imx8mp-3 official-upstream/v7.2/standard/base
+git checkout -b v7.2/standard/pollux official-upstream/v7.2/standard/base
+----------------------------
+
 
